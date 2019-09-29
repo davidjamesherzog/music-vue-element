@@ -12,8 +12,10 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
+      "vuetify",
       "webpack-env",
-      "jest"
+      "jest",
+      "console"
     ],
     "paths": {
       "@/*": [
