@@ -15,9 +15,8 @@
         </span>  
       </el-header>
       
-
       <el-main>
-        Place Holder
+        <router-view></router-view>
       </el-main>
     </el-container>
     
@@ -35,9 +34,9 @@ export default class App extends Vue {
   private searchString: string = '';
 
   public searchMusic() {
-    console.log(`SEARCH MUSIC - ${this.searchString}`);
-    // this.$router.push('/search/' + this.searchString);
-    // this.searchString = '';
+    //console.log(`SEARCH MUSIC - ${this.searchString}`);
+    this.$router.push('/search/' + this.searchString);
+    this.searchString = '';
   }
 
   get dataAvailable() {
