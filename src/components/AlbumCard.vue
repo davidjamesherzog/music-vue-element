@@ -1,8 +1,8 @@
 <template>
   <el-card :body-style="{ padding: '0px' }" class="margin">
-    <img :src="item.artworkUrl100" class="image">
+    <el-image :src="item.artworkUrl100" lazy class="image"></el-image>
     <div style="padding: 14px;">
-      <span>{{item.artistName}}</span>
+      <div class="ellipsis"></div>
       <div class="bottom clearfix">
         <div class="ellipsis">Title: {{item.collectionName}}</div>
         <div>Date: {{item.releaseDate.substring(0,4)}}</div>
