@@ -9,7 +9,7 @@
         Music
         </router-link>
         <span class="float-right">
-          <el-input placeholder="Search Albums" v-model="searchString">
+          <el-input placeholder="Search Albums" clearable v-model="searchString">
             <el-button slot="append" icon="el-icon-search" :disabled="!dataAvailable" @click="searchMusic"></el-button>
           </el-input>
         </span>  
