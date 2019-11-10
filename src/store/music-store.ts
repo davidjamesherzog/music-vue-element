@@ -1,25 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import { AlbumList } from './models/album.list';
-import { AlbumDetails } from './models/album.details';
-import { Type } from './models/type';
-import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
+import { AlbumList } from '../models/album.list';
+import { AlbumDetails } from '../models/album.details';
+import { Type } from '../models/type';
+import { VuexModule, Module, Mutation, Action } from 'vuex-class-modules';
 
-Vue.use(Vuex);
-
-interface MusicStore {
-  music: Music;
-}
-// Declare empty store first
-const store = new Vuex.Store<MusicStore>({});
-
-@Module({
-  namespaced: true,
-  dynamic: true,
-  store,
-  name: 'music'
-})
-class Music extends VuexModule {
+@Module({ generateMutationSetters: true })
+export default class Music extends VuexModule {
   // state
   public loading: boolean = false;
   public search: string = '';
@@ -93,9 +78,3 @@ class Music extends VuexModule {
     this.setLoading(false);
   }
 }
-
-export default new Vuex.Store({
-  modules: {
-    Music
-  }
-});
