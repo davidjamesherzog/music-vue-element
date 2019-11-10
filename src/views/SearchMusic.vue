@@ -21,7 +21,7 @@ import { AlbumList } from '../models/album.list';
 import { Type } from '../models/type';
 import AlbumCard from '../components/AlbumCard.vue';
 
-const musicModule = namespace('Music');
+const musicModule = namespace('music');
 
 @Component({
   name: 'SearchMusic',
