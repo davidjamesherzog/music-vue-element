@@ -7,7 +7,7 @@
 
   <el-container v-else v-loading="loading" grid-list-xl>
     <el-row :gutter="20">
-      <el-col :span="8"  v-for="(item, index) in albumList.results" :key="index">
+      <el-col :span="12" :sm="{span: 8}" :lg="{span: 6}" :xl="{span: 4}" v-for="(item, index) in albumList.results" :key="index">
         <album-card :item="item"></album-card>
       </el-col>
     </el-row>
