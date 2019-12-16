@@ -2,6 +2,7 @@ import { AlbumList } from '../models/album.list';
 import { AlbumDetails } from '../models/album.details';
 import { Type } from '../models/type';
 import { VuexModule, Module, Mutation, Action } from 'vuex-class-modules';
+import jsonp from '../services/jsonp-service';
 
 @Module({ generateMutationSetters: true })
 export default class Music extends VuexModule {
@@ -59,8 +60,9 @@ export default class Music extends VuexModule {
     }
     this.setSearch(search);
     this.setLoading(true);
-    const response: any = await fetch(`https://itunes.apple.com/search?term=${search}&entity=album`);
-    const albumList: AlbumList = await response.json();
+    const albumList: AlbumList = await jsonp<AlbumList>('https://itunes.apple.com/search', {
+      term: search, entity: 'album'
+    });
     this.setAlbumList(albumList);
     this.setLoading(false);
   }
@@ -72,8 +74,9 @@ export default class Music extends VuexModule {
     }
     this.setId(id);
     this.setLoading(true);
-    const response: any = await fetch(`https://itunes.apple.com/lookup?id=${id}&entity=song`);
-    const albumDetails: AlbumDetails = await response.json();
+    const albumDetails: AlbumDetails = await jsonp<AlbumDetails>('https://itunes.apple.com/lookup', {
+      id, entity: 'song'
+    });
     this.setAlbumDetails(albumDetails);
     this.setLoading(false);
   }
