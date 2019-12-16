@@ -42,7 +42,7 @@
           <template slot-scope="scope">
             <span v-if="currentIndex === scope.$index" class="vertical-align">
               <span class="start-time">{{media.time}}</span>
-              <el-progress :percentage="media.percentage" :format="duration"></el-progress>
+              <el-progress class="hidden-xs-only" :percentage="media.percentage" :format="duration"></el-progress>
             </span>
             <i v-if="currentIndex !== scope.$index" class="el-icon-video-play vertical-align" @click="openFile(scope.$index, scope.row)"></i>
             <i v-if="currentIndex === scope.$index && media.playing === false" class="el-icon-video-play vertical-align" @click="play()"></i>
