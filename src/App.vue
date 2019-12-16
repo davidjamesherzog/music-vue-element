@@ -69,6 +69,12 @@ export default class App extends Vue {
   z-index: 9999;
 }
 
+@media only screen and (max-width: 768px) {
+  .el-main {
+    padding: 0 !important;
+  }
+}
+
 .el-main {
   margin-top: 60px;
 }
