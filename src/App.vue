@@ -76,7 +76,7 @@ export default class App extends Vue {
 }
 
 .el-main {
-  margin-top: 60px; 
+  margin-top: 60px;
 }
 
 .el-aside {
