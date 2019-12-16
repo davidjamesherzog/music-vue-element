@@ -8,7 +8,7 @@
   <div v-loading="loading" v-else>
     <el-row :gutter="20">
       <el-col :span="8">
-        <el-image :src="getAlbum.artworkUrl100" lazy class="image"></el-image>
+        <el-image :src="getAlbum.artworkUrl100" class="image"></el-image>
       </el-col>
       <el-col :span="16">
         <div style="padding: 14px;">
@@ -182,6 +182,10 @@ export default class Music extends Vue {
 }
 </script>
 <style lang="scss">
+  h2 {
+    margin-block-start: 0;
+  }
+
   .image {
     width: 100%;
   }
