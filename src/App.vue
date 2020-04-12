@@ -66,7 +66,7 @@ export default class App extends Vue {
   position: fixed;
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
-  z-index: 9999;
+  z-index: 1;
 }
 
 @media only screen and (max-width: 768px) {
