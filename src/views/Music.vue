@@ -18,6 +18,12 @@
             <div>Date: {{getAlbum.releaseDate.substring(0,4)}}</div>
             <div>Genre: {{getAlbum.primaryGenreName}}</div>
             <div>Tracks: {{getAlbum.trackCount - 1}}</div>
+            <div>
+              <a class="spacer" download="album.properties" :href="downloadUrl">
+                <el-button type="primary" icon="el-icon-download" title="Download Metadata" circle size="mini" @click="download()"></el-button>
+              </a>
+              <el-button type="primary" icon="el-icon-document-copy" title="Copy to Clipboard" circle size="mini" @click="copyToClipboard()"></el-button>
+            </div>
           </div>
         </div>
       </el-col>
@@ -83,14 +89,15 @@ export default class Music extends Vue {
   private currentFile!: Type;
   private currentIndex: number = -1;
   private audioService = new AudioService();
+  private downloadUrl: string = '';
 
   // music store
   @musicModule.State
   private loading!: boolean;
   @musicModule.Getter
-  private getAlbum: any;
+  private getAlbum!: Type;
   @musicModule.Getter
-  private getSongs: any;
+  private getSongs!: Type[];
   @musicModule.Action
   private getAlbumDetails: any;
 
@@ -179,6 +186,49 @@ export default class Music extends Vue {
   public pause() {
     this.audioService.pause();
   }
+
+  public constructAlbumDetails(): string {
+    const text = [
+      `Artist: ${this.getAlbum.artistName}`,
+      `Album: ${this.getAlbum.collectionName}`,
+      `Year: ${this.getAlbum.releaseDate.substring(0, 4)}`,
+      `Genre: ${this.getAlbum.primaryGenreName}`,
+      `Extension: mp3`
+    ];
+
+    let discNo = 0;
+    this.getSongs.forEach((song: Type) => {
+      if (song.discNumber !== discNo) {
+        text.push(`Disc ${song.discNumber}:`);
+        discNo = song.discNumber;
+      }
+      if (song.trackNumber < 10) {
+        text.push(`0${song.trackNumber} - ${song.trackName}`);
+      } else {
+        text.push(`${song.trackNumber} - ${song.trackName}`);
+      }
+    });
+
+    return text.join('\r\n');
+  }
+
+  public download() {
+    const data = new Blob([this.constructAlbumDetails()], {type: 'text/plain'});
+    this.downloadUrl = window.URL.createObjectURL(data);
+  }
+
+  public copyToClipboard() {
+    navigator.clipboard.writeText(this.constructAlbumDetails()).then(() => {
+      // @ts-ignore
+      this.$message({
+        message: 'Album copied to clipboard',
+        type: 'success'
+      });
+    }, () => {
+      // @ts-ignore
+      this.$message.error('Error copying album to clipboard');
+    });
+  }
 }
 </script>
 <style lang="scss">
@@ -206,6 +256,10 @@ export default class Music extends Vue {
 
   .progress-width {
     width: 90%;
+  }
+
+  .spacer {
+    margin-right: .5em;
   }
 
   div {
