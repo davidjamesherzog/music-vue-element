@@ -1,5 +1,7 @@
 # music-vue-element
 
+This is an example vue.js and element app using the iTunes API.  You may find a demo [here](https://davidjamesherzog.github.io/music-vue-element/).
+
 ## Project setup
 ```
 npm install
